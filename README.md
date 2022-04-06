@@ -21,6 +21,7 @@ A starter template that gives you some features that almost all apps have so you
 - MONGO_URI=mongodb+srv://< YOUR MONGODB USERNAME >:< YOUR MONGODB PASSWORD >@cluster0.n...
 - JWT_SECRET=YourJWTSecretMakeItLongAndWithNumbers123
 - ...(COMPLETE LATER)
+5. npm run dev
 
 ## Technologies:
 - NodeJS/Express
