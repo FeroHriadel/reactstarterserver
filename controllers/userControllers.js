@@ -82,3 +82,12 @@ exports.signin = async (req, res, next) => {
 
 
 
+exports.getUser = async (req, res, next) => {
+    try {
+        //requireSignin middleware ran before this and popullated req.user = {email, _id, role}
+        res.status(200).json({user: req.user});
+        
+    } catch (error) {
+        next(error);
+    }
+}
