@@ -8,6 +8,7 @@ const colors = require('colors');
 const errorHandler = require('./middleware/errorHandler');
 const connectDB = require('./db/db');
 const userRoutes = require('./routes/userRoutes');
+const categoryRoutes = require('./routes/categoryRoutes');
 
 
 
@@ -26,6 +27,7 @@ app.use(morgan('dev'));
 
 //ROUTES
 app.use('/api/users', userRoutes);
+app.use('/api/categories', categoryRoutes);
 
 
 
