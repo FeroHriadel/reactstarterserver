@@ -26,11 +26,27 @@ exports.requireSignin = async (req, res, next) => {
             if (!user) return next(new ErrorResponse('Non-existing user', 401));
 
             //put userDetails into req.user = {email, role...}
-            delete user.password;
             req.user = user;
+            req.user.password = undefined;
             next();
         })
 
+    } catch (error) {
+        next(error)
+    }
+}
+
+
+
+//this has to be run after requireSignin (above) so req.user gets populated
+exports.requireAdmin = async (req, res, next) => {
+    try {
+        if (!req.user || !req.user.role || req.user.role !== 'admin') {
+            return next(new ErrorResponse('Unauthorized'));
+        }
+
+        next();
+        
     } catch (error) {
         next(error)
     }

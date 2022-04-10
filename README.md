@@ -1,3 +1,10 @@
+# !!!!!!!!!!!!!!!!!!!!!!!!!
+# THIS APP IS JUST BEING BUILT
+## It might take a week or three to finish
+# !!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+
 # REACT STARTER TEMPLATE (SERVER)
 
 ## What is this?
