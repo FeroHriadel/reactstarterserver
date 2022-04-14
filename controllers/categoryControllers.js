@@ -75,3 +75,18 @@ exports.updateCategory = async (req, res, next) => {
         next(error);
     }
 }
+
+
+
+exports.deleteCategoryv = async (req, res, next) => {
+    try {
+        const categoryId = req.params.categoryid;
+        Category.findByIdAndRemove(categoryId).exec((err, deleted) => {
+            if (err) return next(new ErrorResponse('Error. Category NOT deleted', 500));
+            res.status(200).json({message: 'Category deleted'});
+        })
+        
+    } catch (error) {
+        next(error)
+    }
+}
