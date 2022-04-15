@@ -9,6 +9,7 @@ const errorHandler = require('./middleware/errorHandler');
 const connectDB = require('./db/db');
 const userRoutes = require('./routes/userRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
+const tagRoutes = require('./routes/tagRoutes');
 
 
 
@@ -28,6 +29,7 @@ app.use(morgan('dev'));
 //ROUTES
 app.use('/api/users', userRoutes);
 app.use('/api/categories', categoryRoutes);
+app.use('/api/tags', tagRoutes);
 
 
 
