@@ -30,7 +30,7 @@ exports.createCategory = async (req, res, next) => {
 
 exports.getCategories = async (req, res, next) => {
     try {
-        const categories = await Category.find();
+        const categories = await Category.find().sort([['title', 'asc']]);
         if (!categories || categories.length === 0) return next(new ErrorResponse('No categories found', 404));
 
         res.status(200).json({categories});

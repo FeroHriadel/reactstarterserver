@@ -25,3 +25,17 @@ exports.createTag = async (req, res, next) => {
         next(error);
     }
 }
+
+
+
+exports.getTags = async (req, res, next) => {
+    try {
+        const tags = await Tag.find().sort([['title', 'asc']]);
+        if (!tags || !tags.length === 0) return next(new ErrorResponse('No tags found', 404));
+
+        res.status(200).json({tags});
+        
+    } catch (error) {
+        next(error);
+    }
+}
