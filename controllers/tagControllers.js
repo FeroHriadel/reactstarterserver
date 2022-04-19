@@ -39,3 +39,39 @@ exports.getTags = async (req, res, next) => {
         next(error);
     }
 }
+
+
+
+exports.getTagBySlug = async (req, res, next) => {
+    try {
+        const tagSlug = req.params.slug;
+        const tag = await Tag.findOne({slug: tagSlug});
+        if (!tag || !tag.slug) return next(new ErrorResponse('Tag not found', 404));
+        res.status(200).json({tag});
+        
+    } catch (error) {
+       next(error); 
+    }
+}
+
+
+
+exports.updateTag = async (req, res, next) => {
+    try {
+        let {title, description, _id} = req.body;
+        if (!title || title.trim() === '') return next(new ErrorResponse('Title is required', 400));
+        if (!description || description.trim() === '') description = 'No description provided';
+        if (!_id) return next(new ErrorResponse('Tag id is required', 400));
+
+        const tag = await Tag.findById(_id);
+        if (!tag) return next(new ErrorResponse('Tag not found', 404));
+
+        const updatedTag = await Tag.findByIdAndUpdate(_id, {title, description}, {new: true});
+        if (!updatedTag) return next(new ErrorResponse('Error. Tag NOT updated', 500));
+
+        res.status(200).json({tag: updatedTag});
+        
+    } catch (error) {
+        next(error);
+    }
+}
