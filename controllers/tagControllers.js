@@ -6,6 +6,7 @@ const slugify = require('slugify');
 
 exports.createTag = async (req, res, next) => {
     try {
+        console.log(req.body) //////
         let { title, description } = req.body;
         if (!title) return next(new ErrorResponse('Tag title is required', 400));
         if (!description) description = 'No description provided';
@@ -18,7 +19,7 @@ exports.createTag = async (req, res, next) => {
         const newTag = new Tag({title, slug: slugify(title.toLowerCase().trim()), description});
         newTag.save((err, tag) => {
             if (err) return next(new ErrorResponse('Error. Tag NOT saved', 500));
-            res.status(201).json({tag});
+            return res.status(201).json({tag});
         })
         
     } catch (error) {
@@ -73,5 +74,20 @@ exports.updateTag = async (req, res, next) => {
         
     } catch (error) {
         next(error);
+    }
+}
+
+
+
+exports.deleteTag = async (req, res, next) => {
+    try {
+        const tagId = req.params.tagid;
+        Tag.findByIdAndRemove(tagId).exec((err, deleted) => {
+            if (err) return next(new ErrorResponse('Error. Tag NOT deleted', 500));
+            res.status(200).json({message: 'Tag deleted'});
+        })
+        
+    } catch (error) {
+        next(error)
     }
 }
