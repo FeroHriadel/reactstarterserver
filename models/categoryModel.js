@@ -17,7 +17,8 @@ const categorySchema = new mongoose.Schema({
     description: {
         type: String,
         default: 'No description provided'
-    }
+    },
+    image: {public_id: {type: String}, url: {type: String}}
 }, {timestamps: true});
 
 
